@@ -1,0 +1,18 @@
+name: training workflow
+  on: push
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        # Клонируем репозиторий
+        - uses: actions/checkout@v2
+        # Устанавливаем Node.js
+        - uses: actions/setup-node@v1
+        # используем node v.16
+          with:
+            node-version: '16'
+        # запуск нужных команд
+        - run: make setup
+        - run: make test
+        - run: make lint
